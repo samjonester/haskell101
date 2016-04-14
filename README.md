@@ -39,3 +39,4 @@ spec = do
 ```
 6. Run your tests! `cabal test`
 
+7. Write a real test now!
