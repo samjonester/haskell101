@@ -38,6 +38,6 @@ test-suite tests
   hs-source-dirs: test
   main-is: Spec.hs
   build-depends:    base
-                  , hspec                >= 2.3
+                  , hspec                >= 2.2
                   , haskell101
   default-language:    Haskell2010
