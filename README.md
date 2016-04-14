@@ -7,6 +7,18 @@ Unfortunately, the documentation around tooling in haskell isn't as impressive a
 ##Prerequisites
 Install the [Haskell Platform](https://www.haskell.org/platform/).
 
+
+# Starting with this project
+Just clone it, or add it as a remote, then execute the following commands.
+```
+cabal sandbox init
+cabal install --only-dependencies --enable-tests
+cabal build
+cabal test --show-details=streaming --test-option=--color
+```
+
+# Making your own haskell project
+
 ##Create a new haskell project
 ```
 cabal init
