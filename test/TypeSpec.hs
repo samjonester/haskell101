@@ -9,6 +9,10 @@ import Types (
             , MyColor(..)
             , isColor
             , isMyColor
+            , Person(..)
+            , mkNonEmptyString
+            , Range(..)
+            , inclusiveRange
             )
 
 spec :: Spec
@@ -34,7 +38,7 @@ spec = do
       isColor True `shouldBe` False 
   -}
 
-  describe "A simply newtype" $ do
+  describe "A simple newtype" $ do
     it "should be type MyColor Blue" $ do
       show (MyColor Blue) `shouldBe` "MyColor Blue"
 
@@ -46,3 +50,29 @@ spec = do
     it "should not accept a Color" $ do
       isMyColor Blue `shouldBe` True
   -}
+
+  describe "A record" $ do
+    it "should show" $ do
+      show (Person {name="Tom", age=21, favoriteColor=Blue}) `shouldBe` "Tom is 21 years old, and his favorite color is Blue"
+
+    it "should give me a value" $ do
+      favoriteColor (Person {name="foo", age=42, favoriteColor=Blue}) `shouldBe` Blue
+
+  describe "A non empty string" $ do
+    it "should be nothing if empty" $ do
+      mkNonEmptyString "" `shouldBe` Nothing
+    it "should have a value if not empty" $ do
+      mkNonEmptyString "Sam" `shouldBe` Just "Sam"
+    
+  {- 
+   -- Won't compile. Example of what the type system restricts
+    it "should not accept a number" $ do
+      mkNonEmptyString 42 `shouldBe` Nothing
+  -}
+
+  describe "A paramaterized data type" $ do
+    it "should make an inclusive range" $ do
+      inclusiveRange (Range (10 :: Int) (13 :: Int)) `shouldBe` [10,11,12,13]
+
+    it "should fmap" $ do
+      inclusiveRange (fmap (+1) (Range (10 :: Int) (13 :: Int))) `shouldBe` [11,12,13,14]
